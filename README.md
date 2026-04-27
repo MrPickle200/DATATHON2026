@@ -72,6 +72,20 @@ pip install -r requirements.txt
 
 Các thư viện chính: `prophet`, `lightgbm`, `xgboost`, `catboost`, `scikit-learn`, `shap`, `pandas`, `numpy`
 
+### Đăng ký Jupyter Kernel
+
+Sau khi cài xong requirements, cần đăng ký kernel để notebook nhận đúng môi trường:
+
+```bash
+pip install ipykernel
+python -m ipykernel install --user --name datathon --display-name "Python (datathon)"
+```
+
+Sau đó mở notebook và chọn kernel **"Python (datathon)"** ở góc trên bên phải (VSCode) hoặc menu **Kernel → Change Kernel** (Jupyter).
+
+> **Windows:** Chạy file `setup.bat` để tự động hóa toàn bộ bước cài đặt.  
+> **Mac/Linux:** Chạy `bash setup.sh`.
+
 ---
 
 ## Sử dụng
