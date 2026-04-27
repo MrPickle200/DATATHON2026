@@ -1,2 +1,28 @@
-__pycache__/
+# Python
+pycache/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+ML artifacts
 catboost_info/
+*.model
+*.pkl
+*.joblib
+
+# Environments
+.env
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

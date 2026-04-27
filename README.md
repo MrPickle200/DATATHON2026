@@ -11,34 +11,54 @@
 ## Cấu trúc thư mục
 
 ```
-datathon26/
+DATATHON2026/
 ├── data-round-1/
-│   ├── products.csv
-│   ├── customers.csv
-│   ├── promotions.csv
-│   ├── geography.csv
-│   ├── orders.csv
-│   ├── order_items.csv
-│   ├── payments.csv
-│   ├── shipments.csv
-│   ├── returns.csv
-│   ├── reviews.csv
-│   ├── sales.csv
-│   ├── inventory.csv
-│   └── web_traffic.csv
+│ ├── customers.csv
+│ ├── geography.csv
+│ ├── inventory.csv
+│ ├── order_items.csv
+│ ├── orders.csv
+│ ├── payments.csv
+│ ├── products.csv
+│ ├── promotions.csv
+│ ├── returns.csv
+│ ├── reviews.csv
+│ ├── sales.csv
+│ ├── sample_submission.csv
+│ ├── shipments.csv
+│ └── web_traffic.csv
 │
-├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_feature_engineering.ipynb
-│   ├── 03_modeling.ipynb
-│   ├── 04_evaluation.ipynb
-│   └── 05_shap_interpretation.ipynb
+├── Notebooks/
+│ ├── datathon26-mcqs.ipynb # Giải các câu MCQ phân tích dữ liệu
+│ ├── example_baseline.ipynb # Baseline đơn giản (seasonal average + trend)
+│ ├── model.ipynb # Pipeline chính: stacking XGB + LGB + CatBoost + Prophet
+│ └── helper.py # Feature engineering (calendar, Tết, sale seasons, HTE)
 │
-├── submission.csv
-├── DATATHON26_MODELS.xlsx
+├── Submission/
+│ └── submission.csv
+│
 ├── requirements.txt
 └── README.md
 ```
+---
+
+## Phương pháp
+
+Mô hình chính (`model.ipynb`) sử dụng **stacking ensemble** gồm:
+
+- **XGBoost** — `reg:pseudohubererror`, depth 4, 2000 estimators
+- **LightGBM** — gradient boosting trên feature bảng
+- **CatBoost** — xử lý tốt categorical features
+- **Prophet** — bắt trend + seasonality theo tuần/năm
+
+Meta-learner: **HuberRegressor** để robust với outlier.
+
+### Feature engineering (`helper.py`)
+
+- **Calendar features:** year, month, day, dayofweek
+- **Tết features:** `days_to_next_tet`, `days_since_last_tet`, exponential decay effects
+- **Sale season features:** 6 đợt sale mỗi năm (tháng 1, 3, 6, 7, 8, 11), `is_sale_season`, `sale_rank`, `sale_progress`, pre/post-sale decay
+- **Historical Target Encoding (HTE):** encode trung bình target theo nhóm tháng/ngày
 
 ---
 
@@ -46,8 +66,7 @@ datathon26/
 
 ```bash
 git clone https://github.com/MrPickle200/DATATHON2026
-cd datathon26
-
+cd DATATHON2026
 pip install -r requirements.txt
 ```
 
@@ -65,13 +84,11 @@ jupyter notebook
 
 | Notebook | Mục đích |
 |---|---|
-| `01_eda.ipynb` | Phân tích khám phá dữ liệu |
-| `02_feature_engineering.ipynb` | Tạo feature, xử lý lag/rolling |
-| `03_modeling.ipynb` | Huấn luyện model (Prophet + Stacking) |
-| `04_evaluation.ipynb` | Đánh giá, backtesting, xuất `submission.csv` |
-| `05_shap_interpretation.ipynb` | SHAP — phân tích feature importance |
+| `datathon26-mcqs.ipynb` | Phân tích và trả lời các câu hỏi MCQ |
+| `example_baseline.ipynb` | Baseline đơn giản để tham khảo |
+| `model.ipynb` | Pipeline huấn luyện và sinh submission.csv |
 
-> **Lưu ý:** Đặt toàn bộ file CSV vào đúng thư mục `data-round-1/` trước khi chạy. Các notebook phụ thuộc nhau theo thứ tự.
+> **Lưu ý:**  Đặt toàn bộ file CSV vào đúng thư mục data-round-1/ trước khi chạy. model.ipynb import helper.py cùng thư mục — chạy notebook từ bên trong Notebooks/.
 
 ---
 
