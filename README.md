@@ -2,9 +2,9 @@
 
 **Cuộc thi:** Datathon 2026  
 **Mục tiêu:** Dự báo doanh thu và COGS hàng ngày, giai đoạn 01/01/2023 – 01/07/2024  
-**Metric đánh giá:** MAE, RMSE, R²
-**Đội thi:** Optimal
-**Thành viên:** Đào Thế Việt, Phạm Mai Linh
+**Metric đánh giá:** MAE, RMSE, R²  
+**Đội thi:** Optimal  
+**Thành viên:** Đào Thế Việt, Phạm Mai Linh  
 
 ---
 
