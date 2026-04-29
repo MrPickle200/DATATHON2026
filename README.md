@@ -15,6 +15,7 @@ DATATHON2026/
 ├── Notebooks/
 │ ├── datathon26-mcqs.ipynb # Giải các câu MCQ phân tích dữ liệu
 │ ├── example_baseline.ipynb # Baseline đơn giản (seasonal average + trend)
+│ ├── datathon26-shap_analysis.ipynb # Shap analysis cho các base models
 │ └── datathon26-model.ipynb # Pipeline chính: stacking XGB + LGB + CatBoost + Prophet
 ├── Submission/
 │ └── submission.csv
